@@ -1,6 +1,6 @@
 {
-    "name": "monero-integrations/monerophp",
-    "description": "A Monero library written in PHP by the Monero-Integrations team.",
+    "name": "stellitecoin/stellitephp",
+    "description": "A Stellite library written in PHP.",
     "keywords": ["Monero", "XMR", "monerod", "monero-wallet-rpc", "cryptonote", "JSONRPC", "JSON-RPC", "cryptocurrency"],
     "homepage": "https://github.com/monero-integrations/monerophp",
     "type": "library",
