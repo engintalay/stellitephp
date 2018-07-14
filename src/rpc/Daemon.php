@@ -24,8 +24,8 @@ class Daemon{
    * status - string; General RPC error code. "OK" means everything looks good.
    *
    */
-    public function getBlockCount(){
-        return $this->_postRequest('getblockcount');
+    public function getBlockCount($asJson = false){
+        return $this->_postRequest('getblockcount',[],$asJson);
     }
 
 }
