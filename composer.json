@@ -1,8 +1,8 @@
 {
     "name": "stellitecoin/stellitephp",
     "description": "A Stellite library written in PHP.",
-    "keywords": ["Monero", "XMR", "monerod", "monero-wallet-rpc", "cryptonote", "JSONRPC", "JSON-RPC", "cryptocurrency"],
-    "homepage": "https://github.com/monero-integrations/monerophp",
+    "keywords": ["Stellite", "XTL", "stellited", "stellite-wallet-rpc", "cryptonote", "JSONRPC", "JSON-RPC", "cryptocurrency"],
+    "homepage": "https://github.com/stelllitecoin/stellitephp",
     "type": "library",
     "license": "MIT",
     "authors": [
