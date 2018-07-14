@@ -4,9 +4,9 @@ A Stellite library written in PHP by the [Monero Integrations](https://moneroint
 ## How It Works
 This library has 3 main parts:
 
-1. A Monero daemon JSON RPC API wrapper, `daemonRPC.php`
-2. A Monero wallet (`monero-wallet-rpc`) JSON RPC API wrapper, `walletRPC.php`
-3. A Monero/Cryptonote toolbox, `cryptonote.php`, with both lower level functions used in Monero related cryptography and higher level methods for things like generating Monero private/public keys.
+1. A Stellite daemon JSON RPC API wrapper, `daemonRPC.php`
+2. A Stellite wallet (`monero-wallet-rpc`) JSON RPC API wrapper, `walletRPC.php`
+3. A Monero/Cryptonote toolbox, `cryptonote.php`, with both lower level functions used in Stellite related cryptography and higher level methods for things like generating Monero private/public keys.
 
 In addition to these features, there are other lower-level libraries included for portability, *eg.* an ed25519 library, a SHA3 library, *etc.*
 
