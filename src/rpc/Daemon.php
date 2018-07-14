@@ -1,9 +1,7 @@
 <?php
 
 
-namespace Stellite\Rpc\Daemon;
-
-use Stellite\Rpc\Base as RpcBase;
+namespace Stellite\Rpc;
 
 class Daemon extends Base{
 
