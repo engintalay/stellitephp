@@ -1,9 +1,13 @@
 <?php 
+/**
+ *  The RPC base class.
+ */
 
 namespace Stellite\Rpc;
 
 
 class Base{
+	
     public $url;
     private $username;
     private $password;
@@ -28,7 +32,7 @@ class Base{
         $this->url = $url;
     }
 
-    protected function _postRequest($method, $params = [],$asJson = true){
+    protected function _postRequest($method, $params = [],$asArray = true){
 
         $rpc = [
             "jsonrpc"=>"2.0",
@@ -52,10 +56,10 @@ class Base{
         
         $stream = stream_context_create($context);
         $response = file_get_contents($this->url, false, $stream);
-        return json_decode($response, asJson);
-    };
+        return json_decode($response, $asArray);
+    }
     
-    protected function _getRequest($uri,$asJson = true){
+    protected function _getRequest($uri,$asArray = true){
         $_url = $this->url . $uri;
         $context = ['http' =>[
             'method' => 'GET',
@@ -70,7 +74,7 @@ class Base{
         
         $stream = stream_context_create($context);
         $response = file_get_contents($_url,false,$stream);
-        return json_decode($response, asJson);
+        return json_decode($response, $asArray);
     }
 
 
