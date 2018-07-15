@@ -22,7 +22,6 @@ $get_info = $daemonRPC->getInfo();
 // $getbans = $daemonRPC->getbans();
 
 
-
 $walletRPC = new walletRPC('127.0.0.1', 28083); // Change to match your wallet (monero-wallet-rpc) IP address and port; 18083 is the customary port for mainnet, 28083 for testnet, 38083 for stagenet
 // $daemonRPC = new walletRPC(['host' => '127.0.0.1', 'port' => 28081]) // Passing parameters in as array; parameters can be in any order and all are optional.
 $create_wallet = $walletRPC->create_wallet('monero_wallet', ''); // Creates a new wallet named monero_wallet with no passphrase.  Comment this line and edit the next line to use your own wallet
