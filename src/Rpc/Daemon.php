@@ -1,10 +1,18 @@
 <?php
 
 /**
- *  The daemon class. All daemon actions called here
- *   Eg. 
+ * 
+ *  Stellite/Rpc/Daemon
+ *  The daemon class. A class for making calls to stellited using PHP
+ * 
+ * @author     ahmyi <cryptoamity@gmail.com> (https://github.com/ahmyi)
+ * @copyright  2018
+ * @license    MIT
+ * 
+ * Eg. 
  *  $daemon = new \Stellite\Rpc\Daemon($url,$username,$password);
  *  $daemon->getBlockCount();
+ * 
  */
 
 namespace Stellite\Rpc;
@@ -23,8 +31,8 @@ class Daemon extends Base{
    * status - string; General RPC error code. "OK" means everything looks good.
    *
    */
-    public function getBlockCount($asArray = true){
-        return $this->_postRequest('getblockcount',[],$asArray);
+    public function getBlockCount(){
+        return $this->_postRequest('getblockcount',[]);
     }
     
     
@@ -45,20 +53,21 @@ class Daemon extends Base{
    * 
    */
    
-  public function onGetBlockHash($height,$asArray = true){
-  	$options = [];
+  public function onGetBlockHash($height){
   	if(is_array($height)){
-  		if(!isset($options['height'])){
+  		if(!isset($height['height'])){
   			return false;
   		}
-  	}else{
-  		$options['height'] = $height;
+  		
+  		$height = $height['height'];
+  		
   	}
   	
-  	if(!is_integer($options['height'])){
+  	if(!is_integer($height)){
   		return false;
   	}
-    return $this->_postRequest('on_getblockhash',$options,$asArray);
+  	
+    return $this->_postRequest('on_getblockhash',compact('height'));
   }
   
   /**
@@ -86,8 +95,8 @@ class Daemon extends Base{
    * 
    */
    
-   public function getLastBlockHeader($asArray = true){
-		$this->_postRequest('getblockheader',[],$asArray);
+   public function getLastBlockHeader(){
+		$this->_postRequest('getblockheader',[]);
    }
    
    /**
@@ -120,18 +129,16 @@ class Daemon extends Base{
    *	status - string; General RPC error code. "OK" means everything looks good.
    *	untrusted - boolean; States if the result is obtained using the bootstrap mode, and is therefore not trusted (true), or when the daemon is fully synced (false).
    */
-  public function getBlockHeaderByHash($hash,$asArray = true){
-  	$options = [];
+  public function getBlockHeaderByHash($hash){
+  	
   	if(is_array($hash)){
-  		if(!isset($options['hash'])){
+  		if(!isset($hash['hash'])){
   			return false;
   		}
-  	}else{
-  		$options['hash'] = $hash;
+  		$hash = $hash['hash'];
   	}
   	
-  	
-    return $this->_postRequest('getblockheaderbyhash', $options,$asArray);
+    return $this->_postRequest('getblockheaderbyhash', compact('hash'));
   }
   
   
@@ -165,20 +172,19 @@ class Daemon extends Base{
    *	untrusted - boolean; States if the result is obtained using the bootstrap mode, and is therefore not trusted (true), or when the daemon is fully synced (false).
    */
    
-  public function getBlockHeaderByHeight($height,$asArray = true){
-  	$options = [];
+  public function getBlockHeaderByHeight($height){
+
   	if(is_array($height)){
-  		if(!isset($options['height'])){
+  		if(!isset($height['height'])){
   			return false;
   		}
-  	}else{
-  		$options['height'] = $height;
+  		$height = $height['$height'];
   	}
   	
-  	if(!is_integer($options['height'])){
+  	if(!is_integer($height)){
   		return false;
   	}
-    return $this->_postRequest('getblockheaderbyheight', $options,$asArray);
+    return $this->_postRequest('getblockheaderbyheight', compact('height'));
   }
   
   /**
@@ -232,22 +238,23 @@ class Daemon extends Base{
    * 
    */
    
-   public function getBlockHeadersRange($start_height,$end_height,$asArray=true){
-	   	$options = [];
+   public function getBlockHeadersRange($start_height,$end_height){
+
 	  	if(is_array($start_height)){
-	  		if(!isset($options['start_height']) || !isset($options['end_height'])){
+	  		if(!isset($start_height['start_height']) || !isset($start_height['end_height'])){
 	  			return false;
 	  		}
-	  	}else{
-		  	$options['start_height'] = $start_height;
-			$options['end_height'] = $end_height;
+	  		
+	  		$end_height = $start_height['end_height'];
+			$start_height = $start_height['start_height'];
+			
 	  	}
    		
-   		if(!is_integer($options['start_height']) || !is_integer($options['end_height'])){
+   		if(!is_integer($end_height) || !is_integer($start_height)){
   			return false;
   		}
   		
-		return $this->_postRequest('getblockheadersrange', $options,$asArray);
+		return $this->_postRequest('getblockheadersrange', compact('start_height','end_height'));
    }
    
    /**
@@ -281,8 +288,8 @@ class Daemon extends Base{
    * }
    *
    */
-  public function getConnections($asArray=true){
-    return $this->_postRequest('get_connections',$asArray);
+  public function getConnections(){
+    return $this->_postRequest('get_connections');
   }
   
   /**
@@ -309,8 +316,8 @@ class Daemon extends Base{
    * }
    *
    */
-  public function getInfo($asArray=true){
-    return $this->_postRequest('get_info',$asArray);
+  public function getInfo(){
+    return $this->_postRequest('get_info');
   }
 
 }

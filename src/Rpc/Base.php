@@ -12,6 +12,8 @@ class Base{
     private $username;
     private $password;
   
+  	public $isArray = true;
+
     public function __construct($host = 'http://127.0.0.1:20189', $username = null, $password = null){
         if (is_array($host)) { 
             $params = $host;
@@ -34,7 +36,7 @@ class Base{
         $this->url = $url;
     }
 
-    protected function _postRequest($method, $params = [],$asArray = true){
+    protected function _postRequest($method, $params = []){
 
         $rpc = [
             "jsonrpc"=>"2.0",
@@ -58,10 +60,10 @@ class Base{
         
         $stream = stream_context_create($context);
         $response = file_get_contents($this->url.'/json_rpc', false, $stream);
-        return json_decode($response, $asArray);
+        return json_decode($response, $this->asArray);
     }
     
-    protected function _getRequest($uri,$asArray = true){
+    protected function _getRequest($uri){
         $_url = $this->url . $uri;
         $context = ['http' =>[
             'method' => 'GET',
@@ -76,8 +78,7 @@ class Base{
         
         $stream = stream_context_create($context);
         $response = file_get_contents($_url,false,$stream);
-        return json_decode($response, $asArray);
+        return json_decode($response, $this->asArray);
     }
-
 
 }
