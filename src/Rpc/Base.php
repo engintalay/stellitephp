@@ -12,9 +12,9 @@ class Base{
     private $username;
     private $password;
   
-    public function __construct($url = 'http://127.0.0.1:20189', $username = null, $password = null){
-        if (is_array($host)) { // Parameters passed in as object/dictionary
-            $params = $url;
+    public function __construct($host = 'http://127.0.0.1:20189', $username = null, $password = null){
+        if (is_array($host)) { 
+            $params = $host;
             if (issset($params['url'])) {
                 $url = $params['url'];
             } else {
@@ -26,6 +26,8 @@ class Base{
             if (isset($params['password'])) {
               $password = $params['password'];
             }
+        }else{
+        	$url = $host;
         }
         $this->username= $username;
         $this->password = $password;
@@ -51,11 +53,11 @@ class Base{
             'content' => json_encode($rpc)
         ]];
         if($this->username && $this->password){
-            context['http']['header'][] = "Authorization: Basic " . base64_encode("$this->username:$this->password");
+            $context['http']['header'][] = "Authorization: Basic " . base64_encode("$this->username:$this->password");
         }
         
         $stream = stream_context_create($context);
-        $response = file_get_contents($this->url, false, $stream);
+        $response = file_get_contents($this->url.'/json_rpc', false, $stream);
         return json_decode($response, $asArray);
     }
     
@@ -69,7 +71,7 @@ class Base{
         ]];
 
         if($this->username && $this->password){
-            context['http']['header'][] = "Authorization: Basic " . base64_encode("$this->username:$this->password");
+            $context['http']['header'][] = "Authorization: Basic " . base64_encode("$this->username:$this->password");
         }
         
         $stream = stream_context_create($context);

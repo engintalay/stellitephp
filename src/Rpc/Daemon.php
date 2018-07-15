@@ -9,7 +9,7 @@
 
 namespace Stellite\Rpc;
 
-class Daemon{
+class Daemon extends Base{
     
 	/**
    * getblockcount
@@ -46,19 +46,19 @@ class Daemon{
    */
    
   public function onGetBlockHash($height,$asArray = true){
-  	
+  	$options = [];
   	if(is_array($height)){
-  		$options = $height;
   		if(!isset($options['height'])){
   			return false;
   		}
-  		$height = $options['height'];
+  	}else{
+  		$options['height'] = $height;
   	}
   	
-  	if(!is_integer($height)){
+  	if(!is_integer($options['height'])){
   		return false;
   	}
-    return $this->_postRequest('on_getblockhash',compact('height'),$asArray);
+    return $this->_postRequest('on_getblockhash',$options,$asArray);
   }
   
   /**
@@ -121,15 +121,17 @@ class Daemon{
    *	untrusted - boolean; States if the result is obtained using the bootstrap mode, and is therefore not trusted (true), or when the daemon is fully synced (false).
    */
   public function getBlockHeaderByHash($hash,$asArray = true){
+  	$options = [];
   	if(is_array($hash)){
-  		$options = $hash;
   		if(!isset($options['hash'])){
   			return false;
   		}
-  		$hash = $options['hash'];
+  	}else{
+  		$options['hash'] = $hash;
   	}
   	
-    return $this->_postRequest('getblockheaderbyhash', compact('hash'),$asArray);
+  	
+    return $this->_postRequest('getblockheaderbyhash', $options,$asArray);
   }
   
   
@@ -164,18 +166,19 @@ class Daemon{
    */
    
   public function getBlockHeaderByHeight($height,$asArray = true){
+  	$options = [];
   	if(is_array($height)){
-  		$options = $height;
   		if(!isset($options['height'])){
   			return false;
   		}
-  		$height = $options['height'];
+  	}else{
+  		$options['height'] = $height;
   	}
   	
-  	if(!is_integer($height)){
+  	if(!is_integer($options['height'])){
   		return false;
   	}
-    return $this->_postRequest('getblockheaderbyheight', compact('height'),$asArray);
+    return $this->_postRequest('getblockheaderbyheight', $options,$asArray);
   }
   
   /**
@@ -230,21 +233,21 @@ class Daemon{
    */
    
    public function getBlockHeadersRange($start_height,$end_height,$asArray=true){
-   		if(is_array($start_height)){
-   			$options = $start_height;
-   			if(isset($options['start_height'])){
-   				$start_height = $options['start_height'];
-   			}
-   			if(isset($options['end_height'])){
-   				$end_height = $options['end_height'];
-   			}
-   		}
+	   	$options = [];
+	  	if(is_array($start_height)){
+	  		if(!isset($options['start_height']) || !isset($options['end_height'])){
+	  			return false;
+	  		}
+	  	}else{
+		  	$options['start_height'] = $start_height;
+			$options['end_height'] = $end_height;
+	  	}
    		
-   		if(!is_integer($start_height) || !is_integer($end_height)){
+   		if(!is_integer($options['start_height']) || !is_integer($options['end_height'])){
   			return false;
   		}
   		
-		return $this->_postRequest('getblockheadersrange', compact('start_height','end_height'),$asArray);
+		return $this->_postRequest('getblockheadersrange', $options,$asArray);
    }
    
    /**
@@ -307,7 +310,7 @@ class Daemon{
    *
    */
   public function getInfo($asArray=true){
-    return $this->_getRequest('/getinfo',$asArray);
+    return $this->_postRequest('get_info',$asArray);
   }
 
 }
