@@ -18,7 +18,7 @@ This library has 3 main parts. All libraries now uses PSR-4 namespacing.
 In addition to these features, there are other lower-level libraries included for portability, *eg.* an ed25519 library, a SHA3 library, *etc.*
 
 ## Preview
-![Preview](https://user-images.githubusercontent.com/4107993/38056594-b6cd6e14-3291-11e8-96e2-a771b0e9cee3.png)
+![Preview](master/docs/Screen%20Shot%202018-07-16%20at%204.35.07%20PM.png)
 
 ## Documentation
 
