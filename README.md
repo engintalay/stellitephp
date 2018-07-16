@@ -11,14 +11,14 @@ Include composer autoload
 
 This library has 3 main parts. All libraries now uses PSR-4 namespacing.
 1. A Stellite daemon JSON RPC API wrapper, ( `\Stellite\Rpc\Daemon` )
-2. A Stellite wallet (`daemon-wallet-rpc`) JSON RPC API wrapper,  ( `\Stellite\Rpc\Wallet` )
+2. A Stellite wallet (`stellite-wallet-rpc`) JSON RPC API wrapper,  ( `\Stellite\Rpc\Wallet` )
 
 3. A Monero/Cryptonote toolbox, `cryptonote.php`, with both lower level functions used in Stellite related cryptography and higher level methods for things like generating Stellite private/public keys. (not yet refactored)
 
 In addition to these features, there are other lower-level libraries included for portability, *eg.* an ed25519 library, a SHA3 library, *etc.*
 
 ## Preview
-![Preview](master/docs/Screen%20Shot%202018-07-16%20at%204.35.07%20PM.png)
+![Preview](https://raw.githubusercontent.com/stellitecoin/stellitephp/master/docs/Screen%20Shot%202018-07-16%20at%204.35.07%20PM.png)
 
 ## Documentation
 
