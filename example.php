@@ -5,27 +5,22 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-require_once('src/jsonRPCClient.php');
-require_once('src/daemonRPC.php');
+require_once __DIR__ . '/vendor/autoload.php';
 
-$daemonRPC = new daemonRPC('127.0.0.1', 28081); // Change to match your daemon (monerod) IP address and port; 18081 is the default port for mainnet, 28081 for testnet, 38081 for stagenet
-// $daemonRPC = new daemonRPC(['host' => '127.0.0.1', 'port' => 28081]) // Passing parameters in as array; parameters can be in any order and all are optional.
-$getblockcount = $daemonRPC->getblockcount();
-$on_getblockhash = $daemonRPC->on_getblockhash(42069);
-// $getblocktemplate = $daemonRPC->getblocktemplate('9sZABNdyWspcpsCPma1eUD5yM3efTHfsiCx3qB8RDYH9UFST4aj34s5Ygz69zxh8vEBCCqgxEZxBAEC4pyGkN4JEPmUWrxn', 60);
-// $submitblock = $daemonRPC->submitblock($block_blob);
-$getlastblockheader = $daemonRPC->getlastblockheader();
-// $getblockheaderbyhash = $daemonRPC->getblockheaderbyhash('fc7ba2a76071f609e39517dc0388a77f3e27cc2f98c8e933918121b729ee6f27');
-// $getblockheaderbyheight = $daemonRPC->getblockheaderbyheight(696969);
-// $getblock_by_hash = $daemonRPC->getblock_by_hash('fc7ba2a76071f609e39517dc0388a77f3e27cc2f98c8e933918121b729ee6f27');
-// $getblock_by_height = $daemonRPC->getblock_by_height(696969);
-$get_connections = $daemonRPC->get_connections();
-$get_info = $daemonRPC->get_info();
+
+
+$daemonRPC = new \Stellite\Rpc\Daemon('http://testnet.xtlpool.com:20190'); // Change to match your daemon (stellited) IP address and port; 20189 is the default port for mainnet, 28081 for testnet
+$getblockcount = $daemonRPC->getBlockCount();
+$on_getblockhash = $daemonRPC->onGetBlockHash(42069);
+
+$getlastblockheader = $daemonRPC->getLastBlockHeader();
+
+$get_connections = $daemonRPC->getConnections();
+$get_info = $daemonRPC->getInfo();
 // $hardfork_info = $daemonRPC->hardfork_info();
 // $setbans = $daemonRPC->setbans('8.8.8.8');
 // $getbans = $daemonRPC->getbans();
 
-require_once('src/walletRPC.php');
 
 $walletRPC = new walletRPC('127.0.0.1', 28083); // Change to match your wallet (monero-wallet-rpc) IP address and port; 18083 is the customary port for mainnet, 28083 for testnet, 38083 for stagenet
 // $daemonRPC = new walletRPC(['host' => '127.0.0.1', 'port' => 28081]) // Passing parameters in as array; parameters can be in any order and all are optional.
