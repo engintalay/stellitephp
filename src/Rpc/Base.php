@@ -5,7 +5,6 @@
 
 namespace Stellite\Rpc;
 
-
 class Base{
 	
     public $url;
@@ -13,8 +12,8 @@ class Base{
     private $password;
   
   	public $isArray = true;
-
-    public function __construct($host = 'http://127.0.0.1:20189', $username = null, $password = null){
+  	
+  	public function __construct($host = 'http://127.0.0.1:20189', $username = null, $password = null){
         if (is_array($host)) { 
             $params = $host;
             if (issset($params['url'])) {
@@ -60,7 +59,7 @@ class Base{
         
         $stream = stream_context_create($context);
         $response = file_get_contents($this->url.'/json_rpc', false, $stream);
-        return json_decode($response, $this->asArray);
+        return json_decode($response, $this->isArray);
     }
     
     protected function _getRequest($uri){
@@ -78,7 +77,7 @@ class Base{
         
         $stream = stream_context_create($context);
         $response = file_get_contents($_url,false,$stream);
-        return json_decode($response, $this->asArray);
+        return json_decode($response, $this->isArray);
     }
 
 }

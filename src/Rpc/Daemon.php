@@ -4,6 +4,7 @@
  * 
  *  Stellite/Rpc/Daemon
  *  The daemon class. A class for making calls to stellited using PHP
+ *  https://github.com/stellitecoin/stellitephp
  * 
  * @author     ahmyi <cryptoamity@gmail.com> (https://github.com/ahmyi)
  * @copyright  2018
@@ -16,6 +17,9 @@
  */
 
 namespace Stellite\Rpc;
+
+use Stellite\Error\MissingParamsException;
+use Stellite\Error\InvalidParamTypeException;
 
 class Daemon extends Base{
     
@@ -56,7 +60,7 @@ class Daemon extends Base{
   public function onGetBlockHash($height){
   	if(is_array($height)){
   		if(!isset($height['height'])){
-  			return false;
+  			throw new MissingParamsException("height");
   		}
   		
   		$height = $height['height'];
@@ -64,7 +68,9 @@ class Daemon extends Base{
   	}
   	
   	if(!is_integer($height)){
-  		return false;
+  		throw new InvalidParamTypeException([
+  			'height'=>'integer'	
+  		]);
   	}
   	
     return $this->_postRequest('on_getblockhash',compact('height'));
@@ -133,7 +139,7 @@ class Daemon extends Base{
   	
   	if(is_array($hash)){
   		if(!isset($hash['hash'])){
-  			return false;
+			throw new MissingParamsException("hash");
   		}
   		$hash = $hash['hash'];
   	}
@@ -176,14 +182,19 @@ class Daemon extends Base{
 
   	if(is_array($height)){
   		if(!isset($height['height'])){
-  			return false;
+  			throw new MissingParamsException("height");
   		}
-  		$height = $height['$height'];
+  		
+  		$height = $height['height'];
+  		
   	}
   	
   	if(!is_integer($height)){
-  		return false;
+  		throw new InvalidParamTypeException([
+  			'height'=>'integer'	
+  		]);
   	}
+  	
     return $this->_postRequest('getblockheaderbyheight', compact('height'));
   }
   
@@ -239,10 +250,10 @@ class Daemon extends Base{
    */
    
    public function getBlockHeadersRange($start_height,$end_height){
-
+		
 	  	if(is_array($start_height)){
 	  		if(!isset($start_height['start_height']) || !isset($start_height['end_height'])){
-	  			return false;
+	  			throw new MissingParamsException(["start_height","end_height"]);
 	  		}
 	  		
 	  		$end_height = $start_height['end_height'];
@@ -251,8 +262,11 @@ class Daemon extends Base{
 	  	}
    		
    		if(!is_integer($end_height) || !is_integer($start_height)){
-  			return false;
-  		}
+	  		throw new InvalidParamTypeException([
+	  			'start_height'=>'integer',
+	  			'end_height'=>'integer'	
+			]);
+	  	}
   		
 		return $this->_postRequest('getblockheadersrange', compact('start_height','end_height'));
    }
