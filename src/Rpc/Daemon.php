@@ -58,14 +58,7 @@ class Daemon extends Base{
    */
    
   public function onGetBlockHash($height){
-  	if(is_array($height)){
-  		if(!isset($height['height'])){
-  			throw new MissingParamsException("height");
-  		}
-  		
-  		$height = $height['height'];
-  		
-  	}
+  	
   	
   	if(!is_integer($height)){
   		throw new InvalidParamTypeException([
@@ -73,7 +66,7 @@ class Daemon extends Base{
   		]);
   	}
   	
-    return $this->_postRequest('on_getblockhash',compact('height'));
+    return $this->_postRequest('on_getblockhash',[$height]);
   }
   
   /**
@@ -102,7 +95,7 @@ class Daemon extends Base{
    */
    
    public function getLastBlockHeader(){
-		$this->_postRequest('getblockheader',[]);
+		$this->_postRequest('getlastblockheader',[]);
    }
    
    /**
@@ -137,11 +130,8 @@ class Daemon extends Base{
    */
   public function getBlockHeaderByHash($hash){
   	
-  	if(is_array($hash)){
-  		if(!isset($hash['hash'])){
-			throw new MissingParamsException("hash");
-  		}
-  		$hash = $hash['hash'];
+  	if(!$hash){
+		throw new MissingParamsException("hash");
   	}
   	
     return $this->_postRequest('getblockheaderbyhash', compact('hash'));
@@ -180,13 +170,8 @@ class Daemon extends Base{
    
   public function getBlockHeaderByHeight($height){
 
-  	if(is_array($height)){
-  		if(!isset($height['height'])){
-  			throw new MissingParamsException("height");
-  		}
-  		
-  		$height = $height['height'];
-  		
+  	if(!$height){
+  		throw new MissingParamsException("height");
   	}
   	
   	if(!is_integer($height)){
@@ -303,7 +288,12 @@ class Daemon extends Base{
    *
    */
   public function getConnections(){
-    return $this->_postRequest('get_connections');
+    $connections = $this->_postRequest('get_connections');
+    if(!$connections){
+    	$connections = [];
+    }
+    
+    return $connections;
   }
   
   /**

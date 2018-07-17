@@ -4,15 +4,14 @@
  */
 
 namespace Stellite\Rpc;
-
+use Stellite\Error\Exception;
 class Base{
 	
-    public $url;
+	public $url;
     private $username;
     private $password;
+    public $ID = "stellitephp";
   
-  	public $isArray = true;
-  	
   	public function __construct($host = 'http://127.0.0.1:20189', $username = null, $password = null){
         if (is_array($host)) { 
             $params = $host;
@@ -35,13 +34,14 @@ class Base{
         $this->url = $url;
     }
 
-    protected function _postRequest($method, $params = []){
+	protected function _postRequest($method, $params = []){
 
         $rpc = [
             "jsonrpc"=>"2.0",
-            "id"=>"stellitephp",
+            "id"=>$this->ID,
             "method"=>$method
         ];
+        
         if($params){
             $rpc["params"]=$params;
         }
@@ -53,31 +53,21 @@ class Base{
             ],
             'content' => json_encode($rpc)
         ]];
+        
         if($this->username && $this->password){
             $context['http']['header'][] = "Authorization: Basic " . base64_encode("$this->username:$this->password");
         }
+        
         
         $stream = stream_context_create($context);
         $response = file_get_contents($this->url.'/json_rpc', false, $stream);
-        return json_decode($response, $this->isArray);
-    }
-    
-    protected function _getRequest($uri){
-        $_url = $this->url . $uri;
-        $context = ['http' =>[
-            'method' => 'GET',
-            'header' => [
-                "Content-Type: type=application/json\r\n",
-            ]
-        ]];
-
-        if($this->username && $this->password){
-            $context['http']['header'][] = "Authorization: Basic " . base64_encode("$this->username:$this->password");
+        $output = json_decode($response, false);
+        
+        if(isset($output->error)){
+        	throw new Exception($output->error->message);
         }
         
-        $stream = stream_context_create($context);
-        $response = file_get_contents($_url,false,$stream);
-        return json_decode($response, $this->isArray);
+        return $output->result;
     }
 
 }
