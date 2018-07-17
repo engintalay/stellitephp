@@ -577,8 +577,5 @@ class Wallet extends Base{
   }
   
 
-	  
-  
-
   
 }
