@@ -95,7 +95,7 @@ class Daemon extends Base{
    */
    
    public function getLastBlockHeader(){
-		$this->_postRequest('getlastblockheader',[]);
+	return $this->_postRequest('getlastblockheader',[]);
    }
    
    /**
