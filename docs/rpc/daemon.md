@@ -1,21 +1,19 @@
-# `daemonRPC` class
+# `\Stellite\Rpc\Daemon` class
 
-[`src/daemonRPC.php`](https://github.com/monero-integrations/monerophp/tree/master/src/daemonRPC.php)
+[`src/Rpc/Daemon.php`](https://github.com/stellitecoin/stellitephp/tree/master/src/Rpc/Daemon.php)
 
 A class for making calls to a Monero daemon's RPC API using PHP
 
 Parameters:
 
- - `$host <String>` Monero daemon port *(optional)*
- - `$port <nNmber>` Monero daemon protocol (*eg.* 'http') *(optional)*
- - `$protocol <String>` Monero daemon IP hostname *(optional)*
+ - `$host <String>` Stellite daemon port *(optional)*
  - `$user <String>` Monero daemon RPC username *(optional)*
  - `$password <String>` Monero daemon RPC passphrase *(optional)*
 
 Parameters can also be passed in as an associative array (object/dictionary,) as in:
 
 ```php
-$daemonRPC = new daemonRPC(['host' => '127.0.0.1', 'port' => 28081])
+$daemonRPC = new \Stellite\Rpc\Daemon('127.0.0.1:20189')
 ```
 
 If an object is used to provide parameters (as above,) parameters can be declared in any order.
@@ -33,7 +31,7 @@ If an object is used to provide parameters (as above,) parameters can be declare
  - [`getblock_by_height`](#getblock_by_height)
  - [`get_connections`](#get_connections)
  - [`get_info`](#get_info)
- - [`hardfork_info`](#hardfork_info)
+ - [`hardfork_info`](#hard_fork_info)
  - [`setbans`](#setbans)
  - [`getbans`](#getbans)
 

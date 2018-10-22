@@ -1,4 +1,6 @@
-<?php /* -*- coding: utf-8; indent-tabs-mode: t; tab-width: 4 -*-
+<?php
+namespace Stellite\Crypto;
+ /* -*- coding: utf-8; indent-tabs-mode: t; tab-width: 4 -*-
 vim: ts=4 noet ai */
 
 /**
@@ -34,7 +36,7 @@ vim: ts=4 noet ai */
 	This uses PHP's native byte strings. Supports 32-bit as well as 64-bit
 	systems. Also for LE vs. BE systems.
 */
-class SHA3 {
+class Sha3 {
 	const SHA3_224 = 1;
 	const SHA3_256 = 2;
 	const SHA3_384 = 3;

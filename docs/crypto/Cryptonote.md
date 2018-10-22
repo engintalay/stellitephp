@@ -1,6 +1,6 @@
-# `cryptonote` class
+# `\Stellite\Crypto\Cryptonote` class
 
-[`src/cryptonote.php`](https://github.com/monero-integrations/monerophp/tree/master/src/cryptonote.php)
+[`src/Crypto/Cryptonote.php`](https://github.com/stellitecoin/stellitephp/tree/master/src/Crypto/Cryptonote.php)
 
 ### Methods
 

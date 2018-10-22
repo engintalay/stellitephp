@@ -1,6 +1,6 @@
-# `base58` class
+# `\Stellite\Crypto\Base58` class
 
-[`src/base58.php`](https://github.com/monero-integrations/monerophp/tree/master/src/base58.php)
+[`src/Crypto/Base58.php`](https://github.com/stellitecoin/stellitephp/tree/master/src/Crypto/Base58.php)
 
 A PHP Base58 codec
 
