@@ -10,9 +10,9 @@ This document lists the StellitePHP classes and their methods.  More detailed do
  - [`\Stellite\Crypto\Base58`](#base58-class) ([`src/Crypto/Base58.php`](https://github.com/stellitecoin/stellitephp/tree/master/src/Crypto/Base58.php))
 
 JSON RPC wrappers:
-
- - [`\Stellite\Rpc\Daemon`](#daemonRPC-class) ([`src/Rpc/Daemon.php`](https://github.com/stellitecoin/stellitephp/tree/master/src/daemonRPC.php))
- - [`walletRPC`](#walletRPC-class) ([`src/walletRPC.php`](https://github.com/stellitecoin/stellitephp/tree/master/src/walletRPC.php))
+- [`\Stellite\Rpc\Base`](#baseRPC-class) ([`src/Rpc/Base.php`](https://github.com/stellitecoin/stellitephp/tree/master/src/Rpc/Base.php))
+ - [`\Stellite\Rpc\Daemon`](#daemonRPC-class) ([`src/Rpc/Daemon.php`](https://github.com/stellitecoin/stellitephp/tree/master/src/Rpc/Daemon.php))
+ - [`\Stellite\Rpc\Wallet`](#walletRPC-class) ([`src/Rpc/Wallet.php`](https://github.com/stellitecoin/stellitephp/tree/master/src/Rpc/Wallet.php))
 
 ## [`cryptonote` class](https://github.com/stellitecoin/stellitephp/tree/master/docs/crypto/cryptonote.md)
 
